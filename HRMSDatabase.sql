@@ -376,6 +376,16 @@ ALTER TABLE public.job_seekers_favorite_job_adverts
     ADD FOREIGN KEY (job_seeker_id)
     REFERENCES public.job_seekers (user_id)
     NOT VALID;
+ALTER TABLE public.employers
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_adverts
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.cities (id)
+    NOT VALID;
 
 
 ALTER TABLE public.mernis_activations
