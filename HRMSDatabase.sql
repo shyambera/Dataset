@@ -177,12 +177,6 @@ CREATE TABLE IF NOT EXISTS public.job_seekers
     PRIMARY KEY (user_id)
 );
 
--- 2024/03/25 16:34:04.054 16360      19216 G12   Monitors: Generic PnP Monitor, \\.\DISPLAY1, 1920x1080 (0,0), flags=3, dpi=120
--- 2024/03/25 16:34:04.054 16360      19216 G12   GetWebView2RuntimeVersion: got runtime version 113.0.1774.42
--- 2024/03/25 16:34:04.102 16360      19216 G12   CMain::LoadResourceDLLs(): No custom resource dll found
--- 2024/03/25 16:34:04.102 16360      19216 G12   InterProcessBase::SecureNetwork created
--- 2024/03/25 16:34:04.102 16360      19216 G12   AutoLogin::Login: enabled: 1
-    
 CREATE TABLE IF NOT EXISTS public.job_seekers_favorite_job_adverts
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
@@ -382,21 +376,24 @@ ALTER TABLE public.job_seekers_favorite_job_adverts
     ADD FOREIGN KEY (job_seeker_id)
     REFERENCES public.job_seekers (user_id)
     NOT VALID;
-ALTER TABLE public.employers
-    ADD FOREIGN KEY (user_id)
-    REFERENCES public.users (id)
-    NOT VALID;
-
-
-ALTER TABLE public.job_adverts
-    ADD FOREIGN KEY (city_id)
-    REFERENCES public.cities (id)
-    NOT VALID;
 
 
 ALTER TABLE public.mernis_activations
     ADD FOREIGN KEY (user_id)
     REFERENCES public.users (id)
     NOT VALID;
+
+CREATE TABLE IF NOT EXISTS public.job_seekers
+(
+    user_id integer NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    identity_number character(11) NOT NULL,-------------------------------------------------------------
+    birth_date date NOT NULL,
+    cv_id integer,
+    PRIMARY KEY (user_id)
+);
+
+// part id for null values,
 
 END;
